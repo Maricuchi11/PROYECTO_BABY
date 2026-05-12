@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Regalos - Amadeo</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Baloo 2', cursive;
+background:linear-gradient(to bottom,#fdf8f3,#edf5ff);
+padding:20px;
+color:#4b5d7a;
+}
+
+.container{
+max-width:550px;
+margin:auto;
+}
+
+.container h2{
+text-align: center;
+font-size: 15px;
+
+}
+
+.header{
+text-align:center;
+margin-bottom:25px;
+}
+
+.header h1{
+font-size:3rem;
+color:#5b88c7;
+}
+
+.header p{
+font-size:1.1rem;
+color:#7a8ba8;
+}
+
+.banner{
+width:100%;
+border-radius:28px;
+box-shadow:0 10px 25px rgba(0,0,0,0.12);
+margin-bottom:25px;
+}
+
+.card{
+background:white;
+border-radius:24px;
+padding:20px;
+margin-bottom:18px;
+box-shadow:0 8px 20px rgba(0,0,0,0.06);
+}
+
+.card h2{
+color:#5b88c7;
+margin-bottom:12px;
+font-size:1.5rem;
+}
+
+ul{
+list-style:none;
+}
+
+li{
+padding:8px 0;
+font-size:1.05rem;
+border-bottom:1px dashed #d9e4f7;
+}
+
+.back-btn{
+display:block;
+text-align:center;
+text-decoration:none;
+background:#6ea8ff;
+color:white;
+padding:16px;
+border-radius:18px;
+font-size:1.1rem;
+font-weight:bold;
+margin-top:25px;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+    .music-btn {
+      margin-top: 25px;
+      border: none;
+      background: #ffffff;
+      color: #5b88c7;
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: 0.3s;
+      font-family: 'Baloo 2', cursive;
+      text-align: center;
+    }
+
+    .music-btn:hover {
+      transform: scale(1.05);
+    }
+
+@media(max-width:480px){
+.header h1{
+font-size:2.4rem;
+}
+}
+</style>
+</head>
+
+<audio id="music" autoplay loop>
+  <source src="music/Llegas.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+const music = document.getElementById("music");
+
+function startMusic() {
+    music.play();
+    document.removeEventListener("click", startMusic);
+}
+
+document.addEventListener("click", startMusic);
+
+</script>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<h1>🎁 Lista de Regalos</h1>
+<p>Baby Shower del Principito Amadeo 💙</p>
+</div>
+
+<img class="banner" src="img/lista.png" alt="Lista de regalos">
+
+
+<h2> Nota:  Llegar temprano, para poder empezar la celebracion juntos!</h2>
+
+
+<a class="back-btn" href="index.html">💙 Volver a la invitación</a>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+ 
+</body>
+</html>
