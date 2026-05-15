@@ -317,26 +317,198 @@
         width: 180px;
       }
     }
+
+    /* ===== MODAL DE BIENVENIDA ===== */
+    #splash-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(175deg, #7ec8f0 0%, #aadcf7 40%, #ceeeff 100%);
+    }
+
+    #splash-modal .splash-inner {
+      text-align: center;
+      padding: 50px 30px 40px;
+      animation: fadeInUp 0.8s ease;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    #splash-modal h2 {
+      font-size: 2.2rem;
+      color: #ffffff;
+      text-shadow: 0 3px 12px rgba(50,110,180,0.25);
+      margin-bottom: 8px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+    }
+
+    #splash-modal .splash-sub {
+      font-size: 1.15rem;
+      color: #ffffff;
+      margin-bottom: 30px;
+      opacity: 0.95;
+    }
+
+    /* Countdown */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 35px;
+    }
+
+    .countdown-box {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 14px 18px;
+      min-width: 70px;
+      box-shadow: 0 4px 18px rgba(80,140,200,0.18);
+    }
+
+    .countdown-box .num {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #3a7bd5;
+      line-height: 1;
+    }
+
+    .countdown-box .lbl {
+      display: block;
+      font-size: 0.78rem;
+      color: #7aabda;
+      margin-top: 4px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    #splash-modal .btn-start {
+      background: #ffffff;
+      border: none;
+      color: #3a7bd5;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 15px 45px;
+      border-radius: 50px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      box-shadow: 0 6px 20px rgba(80,140,200,0.25);
+      transition: 0.3s ease;
+    }
+
+    #splash-modal .btn-start:hover {
+      transform: scale(1.06);
+      box-shadow: 0 8px 28px rgba(80,140,200,0.35);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .splash-hide {
+      animation: splashOut 0.6s ease forwards !important;
+    }
+
+    @keyframes splashOut {
+      to { opacity: 0; transform: scale(1.05); pointer-events: none; }
+    }
+
+    #main-content {
+      display: none;
+    }
   </style>
 </head> 
 
-<audio id="music" autoplay loop>
-  <source src="music/Tesperaba.mp3" type="audio/mp3">
+<audio id="musica" loop>
+    <source src="music/Tesperaba.mp3" type="audio/mp3">
 </audio>
 
 <script>
+// Fecha del evento: 20 de junio 2026 a las 16:00
+const eventoFecha = new Date('2026-06-20T16:00:00');
 
-const music = document.getElementById("music");
+function actualizarCountdown() {
+    const ahora = new Date();
+    const diff = eventoFecha - ahora;
 
-function startMusic() {
-    music.play();
-    document.removeEventListener("click", startMusic);
+    if (diff <= 0) {
+        document.getElementById('cd-dias').textContent  = '00';
+        document.getElementById('cd-horas').textContent = '00';
+        document.getElementById('cd-min').textContent   = '00';
+        document.getElementById('cd-seg').textContent   = '00';
+        return;
+    }
+
+    const dias  = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const min   = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seg   = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('cd-dias').textContent  = String(dias).padStart(2, '0');
+    document.getElementById('cd-horas').textContent = String(horas).padStart(2, '0');
+    document.getElementById('cd-min').textContent   = String(min).padStart(2, '0');
+    document.getElementById('cd-seg').textContent   = String(seg).padStart(2, '0');
 }
 
-document.addEventListener("click", startMusic);
+document.addEventListener('DOMContentLoaded', () => {
+    actualizarCountdown();
+    setInterval(actualizarCountdown, 1000);
+});
 
+function empezar() {
+    const modal = document.getElementById('splash-modal');
+    const content = document.getElementById('main-content');
+    const audio = document.getElementById('musica');
+
+    modal.classList.add('splash-hide');
+    setTimeout(() => { modal.style.display = 'none'; }, 600);
+
+    content.style.display = 'block';
+    audio.play();
+}
 </script>
+
+
 <body>
+
+  <!-- MODAL DE BIENVENIDA -->
+  <div id="splash-modal">
+    <div class="splash-inner">
+      <h2>BIENVENIDOS AL BABY SHOWER</h2>
+      <p class="splash-sub">💙 AMADEO 💙</p>
+
+      <div class="countdown">
+        <div class="countdown-box">
+          <span class="num" id="cd-dias">00</span>
+          <span class="lbl">Días</span>
+        </div>
+        <div class="countdown-box">
+          <span class="num" id="cd-horas">00</span>
+          <span class="lbl">Horas</span>
+        </div>
+        <div class="countdown-box">
+          <span class="num" id="cd-min">00</span>
+          <span class="lbl">Min</span>
+        </div>
+        <div class="countdown-box">
+          <span class="num" id="cd-seg">00</span>
+          <span class="lbl">Seg</span>
+        </div>
+      </div>
+
+      <button class="btn-start" onclick="empezar()">EMPEZAR ✨</button>
+    </div>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div id="main-content">
 
   <img class="floating-item star1" src="https://cdn-icons-png.flaticon.com/512/616/616490.png">
   <img class="floating-item star2" src="https://cdn-icons-png.flaticon.com/512/616/616490.png">
@@ -353,6 +525,16 @@ document.addEventListener("click", startMusic);
       <h2>Baby Shower del Principito</h2>
       <h1> "AMADEO"</h1>
 
+       <p class="subtitle">
+        Mis papitos💙
+      </p> 
+      <p class="subtitle">
+        Kenty Figueroa Valverde
+       
+      <p class="subtitle">
+        
+        Marilenny Benavente Padilla
+      </p>
       <div class="info">
         ✨ 20 JUNIO<br>
         🕓 4:00 P.M.
@@ -371,7 +553,7 @@ document.addEventListener("click", startMusic);
         </a>
 
         <a class="btn whatsapp"
-        href="https://wa.link/39l5x9"
+        href="https://forms.cloud.microsoft/r/QbnNgcTCKy"
         target="_blank">
         💬 CONFIRMAR ASISTENCIA
         </a>
@@ -403,7 +585,7 @@ document.addEventListener("click", startMusic);
       </div>
 
       <div class="footer">
-        Gracias por ser parte de este hermoso recuerdo 💫
+        Gracias por ser parte de este hermoso recuerdo 💫👶🏻
       </div>
 
     </div>
@@ -411,12 +593,13 @@ document.addEventListener("click", startMusic);
 
  
 
+  <footer class="footer-love">
+    💙 Creado por Mamá con Amor para Amadeo ✨
+  </footer>
+
+  </div><!-- fin main-content -->
+
 </body>
-
-
-<footer class="footer-love">
-💙 Creado por mamá con cariño para Amadeo ✨
-</footer>
 
 </html>
 

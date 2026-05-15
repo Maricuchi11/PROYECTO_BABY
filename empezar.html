@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Baby Shower Amadeo</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background:linear-gradient(to bottom, #7ec8ff, #dff6ff);
+    font-family:Arial, Helvetica, sans-serif;
+    overflow:hidden;
+}
+
+/* PANTALLA INICIAL */
+
+#inicio{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:linear-gradient(to bottom, #7ec8ff, #dff6ff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:1000;
+}
+
+#inicio h1{
+    color:white;
+    font-size:60px;
+    text-align:center;
+    margin-bottom:20px;
+    text-shadow:3px 3px 10px rgba(0,0,0,0.3);
+}
+
+#inicio p{
+    color:white;
+    font-size:25px;
+    margin-bottom:40px;
+    text-shadow:2px 2px 8px rgba(0,0,0,0.3);
+}
+
+/* BOTON */
+
+button{
+    padding:18px 45px;
+    border:none;
+    border-radius:50px;
+    background:white;
+    color:#4aa3df;
+    font-size:25px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+button:hover{
+    transform:scale(1.08);
+    background:#4aa3df;
+    color:white;
+}
+
+/* CONTENIDO */
+
+#contenido{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* TITULOS */
+
+h2{
+    color:white;
+    font-size:60px;
+    text-align:center;
+    margin-bottom:15px;
+    text-shadow:3px 3px 10px rgba(0,0,0,0.3);
+}
+
+.subtitulo{
+    color:white;
+    font-size:25px;
+    margin-bottom:40px;
+    text-shadow:2px 2px 8px rgba(0,0,0,0.3);
+}
+
+/* CONTADOR */
+
+#contador{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.tiempo{
+    background:white;
+    width:140px;
+    padding:25px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    animation:flotar 3s ease-in-out infinite;
+}
+
+.numero{
+    font-size:55px;
+    font-weight:bold;
+    color:#4aa3df;
+}
+
+.texto{
+    font-size:20px;
+    color:#666;
+    margin-top:8px;
+}
+
+/* ANIMACION */
+
+@keyframes flotar{
+    0%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:700px){
+
+    #inicio h1,
+    h2{
+        font-size:38px;
+        padding:0 15px;
+    }
+
+    #inicio p,
+    .subtitulo{
+        font-size:18px;
+        text-align:center;
+        padding:0 15px;
+    }
+
+    .tiempo{
+        width:120px;
+        padding:20px;
+    }
+
+    .numero{
+        font-size:40px;
+    }
+
+    button{
+        font-size:20px;
+        padding:15px 35px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PANTALLA INICIAL -->
+
+<div id="inicio">
+
+    <h1>BIENVENIDOS AL BABY SHOWER</h1>
+
+    <p>💙 AMADEO 💙</p>
+
+    <button onclick="empezarInvitacion()">
+        EMPEZAR ✨
+    </button>
+
+</div>
+
+<!-- CONTENIDO -->
+
+<div id="contenido">
+
+    <h2>FALTA POCO 💙</h2>
+
+    <p class="subtitulo">
+        Para conocer a Amadeo
+    </p>
+
+    <div id="contador">
+
+        <div class="tiempo">
+            <div class="numero" id="dias">00</div>
+            <div class="texto">Días</div>
+        </div>
+
+        <div class="tiempo">
+            <div class="numero" id="horas">00</div>
+            <div class="texto">Horas</div>
+        </div>
+
+        <div class="tiempo">
+            <div class="numero" id="minutos">00</div>
+            <div class="texto">Minutos</div>
+        </div>
+
+        <div class="tiempo">
+            <div class="numero" id="segundos">00</div>
+            <div class="texto">Segundos</div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MUSICA -->
+
+<audio id="musica" loop>
+    <source src="music/Tesperaba.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+/* BOTON EMPEZAR */
+
+function empezarInvitacion(){
+
+    document.getElementById("inicio").style.display = "none";
+
+    document.getElementById("contenido").style.display = "flex";
+
+    const audio = document.getElementById("musica");
+
+    audio.play();
+
+}
+
+/* FECHA EVENTO */
+
+const fechaEvento = new Date("Jun 20, 2026 00:00:00").getTime();
+
+/* CUENTA REGRESIVA */
+
+const intervalo = setInterval(() => {
+
+    const ahora = new Date().getTime();
+
+    const diferencia = fechaEvento - ahora;
+
+    const dias = Math.floor(
+        diferencia / (1000 * 60 * 60 * 24)
+    );
+
+    const horas = Math.floor(
+        (diferencia % (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+    );
+
+    const minutos = Math.floor(
+        (diferencia % (1000 * 60 * 60)) /
+        (1000 * 60)
+    );
+
+    const segundos = Math.floor(
+        (diferencia % (1000 * 60)) / 1000
+    );
+
+    document.getElementById("dias").innerHTML = dias;
+    document.getElementById("horas").innerHTML = horas;
+    document.getElementById("minutos").innerHTML = minutos;
+    document.getElementById("segundos").innerHTML = segundos;
+
+    if (diferencia < 0){
+
+        clearInterval(intervalo);
+
+        document.getElementById("contador").innerHTML = `
+            <h2 style="
+                color:white;
+                text-align:center;
+                font-size:50px;
+            ">
+                🎉 ¡Llegó el gran día! 💙
+            </h2>
+        `;
+    }
+
+}, 1000);
+
+</script>
+
+</body>
+</html>
