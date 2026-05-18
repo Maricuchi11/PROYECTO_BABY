@@ -14,6 +14,43 @@
   <!-- FIREBASE -->
   <script type="module" src="app.js"></script>
 </head>
+
+<audio id="musica" loop>
+  <source src="music/indigo.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+const musica = document.getElementById("musica");
+
+musica.volume = 0.5;
+
+// Intentar autoplay
+window.addEventListener("load", () => {
+
+  musica.play().catch(() => {
+
+    // Si el navegador bloquea
+    document.addEventListener("click", iniciarMusica);
+
+    document.addEventListener("touchstart", iniciarMusica);
+
+  });
+
+});
+
+function iniciarMusica(){
+
+  musica.play();
+
+  document.removeEventListener("click", iniciarMusica);
+
+  document.removeEventListener("touchstart", iniciarMusica);
+
+}
+
+</script>
+
 <body>
 
   <div class="container">
@@ -37,11 +74,13 @@
     </div>
 
     <p>
-        Si deseas obsequiar algo, solo <b>SELECCIONA</b> tu regalo de manera <b>anónima</b>  y da <b>CLIC</b>  en el boton de la parte de abajo  <b>“Reservar regalo”</b> .
+        Si deseas obsequiar algo, solo <b>SELECCIONA</b> tu regalo de manera <b>anónima</b>  y da <b>CLICK</b>  en el boton de la parte de abajo  <b>“RESERVAR REGALO”</b> .
 Al hacerlo, el artículo quedará marcado en la lista para evitar regalos repetidos  🎁 <br>
   <br>  Cualquier detalle será recibido con muchísimo amor y cariño para nuestro bebé 👶💙
 ¡Gracias por acompañarnos en esta etapa tan especial!
 <br>
+
+<P>  <b>Puedes Seleccionar uno o varios deseos:  </b></P>
       <br>
 
     <div class="grid">
@@ -131,14 +170,15 @@ Al hacerlo, el artículo quedará marcado en la lista para evitar regalos repeti
         </label>
 
         <label>
+          <input type="checkbox" data-id="zapatitos">
+          Zapatitos de vestir 
+        </label>
+
+        <label>
           <input type="checkbox" data-id="zapatitos_medias">
           Gorritos y medias o calcetines
         </label>
 
-        <label>
-          <input type="checkbox" data-id="perchas">
-          Perchas para ropa bebé 
-        </label>
 
       </div>
 
@@ -186,15 +226,21 @@ Al hacerlo, el artículo quedará marcado en la lista para evitar regalos repeti
       <div class="card">
         <h3>🛁 Higiene</h3>
 
+      
         <label>
-          <input type="checkbox" data-id="panales_rn">
-          Pañales RN
+        <input type="checkbox" data-id="panales_3meses">
+          Pañales 3 a 6 meses
         </label>
 
         <label>
          <input type="checkbox" data-id="panales_p">
           Pañales Talla P
         </label>
+
+        <label>
+          <input type="checkbox" data-id="panales_m">
+          Pañales Talla M
+        </label> 
 
         <label>
          <input type="checkbox" data-id="panales_tela">
@@ -204,6 +250,11 @@ Al hacerlo, el artículo quedará marcado en la lista para evitar regalos repeti
         <label>
           <input type="checkbox" data-id="tina">
           Tina para baño  
+        </label>
+        
+        <label>
+          <input type="checkbox" data-id="toallitas_salidabaño">
+          Toallas de salida de baño
         </label>
 
         <label>
@@ -220,6 +271,8 @@ Al hacerlo, el artículo quedará marcado en la lista para evitar regalos repeti
           <input type="checkbox" data-id="aseo">
           Shampo y Acondicionador para bebé
         </label>
+
+
       </div>
 
       <!-- paseos y salidas  -->
@@ -228,7 +281,12 @@ Al hacerlo, el artículo quedará marcado en la lista para evitar regalos repeti
 
         <label>
           <input type="checkbox" data-id="coche">
-          Coche para bebé
+          Coche Moises para bebé
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="COCHE_PARAGUAS">
+          Coche paraguas 
         </label>
 
         <label>
@@ -260,6 +318,9 @@ Al hacerlo, el artículo quedará marcado en la lista para evitar regalos repeti
           <input type="checkbox" data-id="mantas">
           Mantas para salidas
         </label>
+
+        
+
 
       </div> 
 
@@ -303,6 +364,12 @@ Al hacerlo, el artículo quedará marcado en la lista para evitar regalos repeti
           <input type="checkbox" data-id="Juguetes_educativos">
           Juguetes educativos
         </label>
+
+        <label>
+          <input type="checkbox" data-id="peluches_antialergicos">
+          Peluches antialergicos
+        </label>
+
       </div>
 
 
@@ -312,12 +379,19 @@ Al hacerlo, el artículo quedará marcado en la lista para evitar regalos repeti
 
     <p> <b>Nota:</b>   Una vez elegido el obsequio, no se puede revertir la seleccion, porfavor seleccionar bien antes de reservar 
       <p> Para mayor informacion puede contactarse con el administrador de esta pagina web</p>
+    
     </p>
     <div class="reserve-box">
       <button id="reserveBtn">
         🎁 Reservar regalos
       </button>
     </div>
+    <br>
+    <div class="back-box">
+  <a href="index.html" class="back-btn">
+    ⬅ Volver al Inicio
+  </a>
+</div>
 
     <div class="footer">
       💙 Gracias por acompañarnos 💙

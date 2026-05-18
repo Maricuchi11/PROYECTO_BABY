@@ -27,7 +27,7 @@ body{
 }
 
 .top h1{
-  font-size:55px;
+  font-size:40px;
   color:#5d88c7;
 }
 
@@ -154,4 +154,26 @@ input[type="checkbox"]:disabled{
 .checked{
   text-decoration:line-through;
   opacity:.6;
+}
+
+
+.back-box{
+  margin-bottom:25px;
+}
+
+.back-btn{
+  display:inline-block;
+  background:#6fa8dc;
+  color:white;
+  text-decoration:none;
+  padding:12px 25px;
+  border-radius:12px;
+  font-size:20px;
+  transition:.3s;
+  box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.back-btn:hover{
+  background:#5c95ca;
+  transform:translateY(-2px);
 }
