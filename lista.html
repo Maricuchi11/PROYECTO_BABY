@@ -1,169 +1,329 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lista de Regalos - Amadeo</title>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista de Regalos - Amadeo</title>
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
 
-body{
-font-family:'Baloo 2', cursive;
-background:linear-gradient(to bottom,#fdf8f3,#edf5ff);
-padding:20px;
-color:#4b5d7a;
-}
+  <link rel="stylesheet" href="style.css">
 
-.container{
-max-width:550px;
-margin:auto;
-}
-
-.container h2{
-text-align: center;
-font-size: 15px;
-
-}
-
-.header{
-text-align:center;
-margin-bottom:25px;
-}
-
-.header h1{
-font-size:3rem;
-color:#5b88c7;
-}
-
-.header p{
-font-size:1.1rem;
-color:#7a8ba8;
-}
-
-.banner{
-width:100%;
-border-radius:28px;
-box-shadow:0 10px 25px rgba(0,0,0,0.12);
-margin-bottom:25px;
-}
-
-.card{
-background:white;
-border-radius:24px;
-padding:20px;
-margin-bottom:18px;
-box-shadow:0 8px 20px rgba(0,0,0,0.06);
-}
-
-.card h2{
-color:#5b88c7;
-margin-bottom:12px;
-font-size:1.5rem;
-}
-
-ul{
-list-style:none;
-}
-
-li{
-padding:8px 0;
-font-size:1.05rem;
-border-bottom:1px dashed #d9e4f7;
-}
-
-.back-btn{
-display:block;
-text-align:center;
-text-decoration:none;
-background:#6ea8ff;
-color:white;
-padding:16px;
-border-radius:18px;
-font-size:1.1rem;
-font-weight:bold;
-margin-top:25px;
-box-shadow:0 8px 20px rgba(0,0,0,0.08);
-}
-
-    .music-btn {
-      margin-top: 25px;
-      border: none;
-      background: #ffffff;
-      color: #5b88c7;
-      padding: 12px 20px;
-      border-radius: 50px;
-      font-size: 1rem;
-      cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transition: 0.3s;
-      font-family: 'Baloo 2', cursive;
-      text-align: center;
-    }
-
-    .music-btn:hover {
-      transform: scale(1.05);
-    }
-
-@media(max-width:480px){
-.header h1{
-font-size:2.4rem;
-}
-}
-</style>
+  <!-- FIREBASE -->
+  <script type="module" src="app.js"></script>
 </head>
-
-<audio id="music" autoplay loop>
-  <source src="music/Llegas.mp3" type="audio/mp3">
-</audio>
-
-<script>
-
-const music = document.getElementById("music");
-
-function startMusic() {
-    music.play();
-    document.removeEventListener("click", startMusic);
-}
-
-document.addEventListener("click", startMusic);
-
-</script>
-
 <body>
 
-<div class="container">
+  <div class="container">
 
-<div class="header">
-<h1>🎁 Lista de Regalos</h1>
-<p>Baby Shower del Principito Amadeo 💙</p>
-</div>
+    <div class="top">
+      <h1>🎁 Lista de Regalos</h1>
+      <p>Baby Shower del Principito Amadeo 💙</p>
+    </div>
 
-<img class="banner" src="img/lista.png" alt="Lista de regalos">
+    <div class="banner">
+      <h2>¡BIENVENIDO,<br><span>AMADEO!</span></h2>
+
+      <p>
+        Con muchísimo cariño queremos agradecerles por acompañarnos
+        en este día tan especial 💙
+      </p>
+    </div>
+
+    <div class="gift-title">
+      LISTA DE DESEOS - AMADEO 🎁
+    </div>
+
+    <p>
+        Si deseas obsequiar algo, solo <b>SELECCIONA</b> tu regalo de manera <b>anónima</b>  y da <b>CLIC</b>  en el boton de la parte de abajo  <b>“Reservar regalo”</b> .
+Al hacerlo, el artículo quedará marcado en la lista para evitar regalos repetidos  🎁 <br>
+  <br>  Cualquier detalle será recibido con muchísimo amor y cariño para nuestro bebé 👶💙
+¡Gracias por acompañarnos en esta etapa tan especial!
+<br>
+      <br>
+
+    <div class="grid">
+
+      <!-- ALIMENTACION -->
+      <div class="card">
+        <h3>🍼 Alimentación</h3>
+
+        <label>
+          <input type="checkbox" data-id="biberones_pequenos">
+          Biberones pequeños
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="biberones_grandes">
+          Biberones grandes
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="Almohada_lactancia">
+          Almohada de lactancia
+        </label>
+        
+        <label>
+          <input type="checkbox" data-id="baberos">
+          Silla de comer para bebé
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="Extractor_leche">
+          Extractor de leche
+        </label>
+         
+        <label>
+          <input type="checkbox" data-id="baberos_bb">
+          Baberos Para Bebes
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="cepillo">
+          Cepillo limpiabiberones
+        </label>
+
+         <label>
+          <input type="checkbox" data-id="calienta_biberones">
+          Calienta biberones
+        </label>
+      </div>
+
+      <!-- ROPITA -->
+      <div class="card">
+        <h3>👕 Ropita</h3>
+
+        <label>
+          <input type="checkbox" data-id="bodies_l">
+          Bodies manga corta 
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="bodies_c">
+          Bodies manga larga 
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="bodies_algodon">
+          Pijamas de algodon
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="pijamas">
+          Conjuntos para salir
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="chompas">
+          Chompas
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="toallas">
+          Toallas con capucha
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="zapatitos">
+          Zapatitos suaves 
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="zapatitos_medias">
+          Gorritos y medias o calcetines
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="perchas">
+          Perchas para ropa bebé 
+        </label>
+
+      </div>
+
+      <!-- DESCANSO -->
+      <div class="card">
+        <h3>🛏️ Descanso</h3>
+
+        <label>
+          <input type="checkbox" data-id="cuna">
+          Cuna o cuna colecho
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="mecedora">
+          Mecedora automatica para bebé
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="cobijas">
+          Cobijitas
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="almohada">
+          Almohada antireflujo
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="sabanas">
+          Sábanas para cuna
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="monitor">
+          Monitor para bebé
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="cesta">
+          Cesta de ropa para bebé
+        </label>
+      </div>
+
+      <!-- HIGIENE -->
+      <div class="card">
+        <h3>🛁 Higiene</h3>
+
+        <label>
+          <input type="checkbox" data-id="panales_rn">
+          Pañales RN
+        </label>
+
+        <label>
+         <input type="checkbox" data-id="panales_p">
+          Pañales Talla P
+        </label>
+
+        <label>
+         <input type="checkbox" data-id="panales_tela">
+          Pañales de tela
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="tina">
+          Tina para baño  
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="toallitas_h">
+          Toallitas Humedas
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="organizador">
+          Organizador pañales
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="aseo">
+          Shampo y Acondicionador para bebé
+        </label>
+      </div>
+
+      <!-- paseos y salidas  -->
+      <div class="card">
+        <h3>🚼 Paseos y Salidas </h3>
+
+        <label>
+          <input type="checkbox" data-id="coche">
+          Coche para bebé
+        </label>
+
+        <label>
+         <input type="checkbox" data-id="canguro">
+          Porta bebé / Canguro
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="pañalera">
+          Pañalera
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="asiento">
+          Asiento para Auto 
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="mosquitero">
+          Mosquitero para Coche
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="cambiador">
+          Cambiador Portatil
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="mantas">
+          Mantas para salidas
+        </label>
+
+      </div> 
 
 
-<h2> Nota:  Llegar temprano, para poder empezar la celebracion juntos!</h2>
+
+      <!-- Juegos y Entretenimiento  -->
+      <div class="card">
+        <h3> 👶🪇Juegos y Entretenimiento </h3>
+
+        <label>
+          <input type="checkbox" data-id="sonajas">
+          Sonajeros 
+        </label>
+
+        <label>
+         <input type="checkbox" data-id="gym">
+          Gimnasio para bebé
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="mordedores">
+          Mordedores
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="libritos">
+          Libritos de tela
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="mantas_piso">
+          Mantas de piso
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="Juguetes_sensoriales">
+          Juguetes sensoriales
+        </label>
+
+        <label>
+          <input type="checkbox" data-id="Juguetes_educativos">
+          Juguetes educativos
+        </label>
+      </div>
 
 
-<a class="back-btn" href="index.html">💙 Volver a la invitación</a>
 
 
+    </div>
 
+    <p> <b>Nota:</b>   Una vez elegido el obsequio, no se puede revertir la seleccion, porfavor seleccionar bien antes de reservar 
+      <p> Para mayor informacion puede contactarse con el administrador de esta pagina web</p>
+    </p>
+    <div class="reserve-box">
+      <button id="reserveBtn">
+        🎁 Reservar regalos
+      </button>
+    </div>
 
+    <div class="footer">
+      💙 Gracias por acompañarnos 💙
+    </div>
 
+  </div>
 
-</div>
-
-
-
-
-
-
- 
 </body>
 </html>

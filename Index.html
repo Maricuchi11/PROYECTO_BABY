@@ -347,13 +347,50 @@
       line-height: 1.2;
     }
 
-    #splash-modal .splash-sub {
-      font-size: 1.15rem;
+    #splash-modal h3 {
+      font-size: 2.2rem;
       color: #ffffff;
-      margin-bottom: 30px;
-      opacity: 0.95;
+      text-shadow: 0 3px 12px rgba(50,110,180,0.25);
+      margin-bottom: 8px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
     }
 
+    /*AMADEO EL NOMBRE */
+    #splash-modal .splash-sub {
+        font-size:30px;
+    font-weight:900;
+    font-family:Arial, Helvetica, sans-serif;
+    text-transform:uppercase;
+    letter-spacing:6px;
+
+    /* DEGRADADO */
+    background:linear-gradient(
+        90deg,
+        #0655cc,
+        #1a71e4,
+        #169bb3,
+        #125eb6,
+        #26a3dd
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    /* CONTORNO */
+    -webkit-text-stroke:2px rgba(255,255,255,0.8);
+
+    /* SOMBRA SUAVE */
+    text-shadow:
+        3px 3px 0 rgba(0,0,0,0.08),
+        6px 6px 10px rgba(0,0,0,0.12);
+
+    text-align:center;
+      
+    }
+
+    
     /* Countdown */
     .countdown {
       display: flex;
@@ -483,7 +520,10 @@ function empezar() {
     <div class="splash-inner">
       <h2>BIENVENIDOS AL BABY SHOWER</h2>
       <p class="splash-sub">💙 AMADEO 💙</p>
-
+      <P></P>
+      <P style="COLOR:white"> _______ </P>
+      <h3> FALTAN !</h3>
+      
       <div class="countdown">
         <div class="countdown-box">
           <span class="num" id="cd-dias">00</span>
@@ -502,7 +542,7 @@ function empezar() {
           <span class="lbl">Seg</span>
         </div>
       </div>
-
+      <h3>20 / 06 / 2026 </h3>
       <button class="btn-start" onclick="empezar()">EMPEZAR ✨</button>
     </div>
   </div>
@@ -529,15 +569,16 @@ function empezar() {
         Mis papitos💙
       </p> 
       <p class="subtitle">
-        Kenty Figueroa Valverde
+        🤴🏻 Amaro Kenty Figueroa Valverde
        
       <p class="subtitle">
         
-        Marilenny Benavente Padilla
+        👸🏻 Marilenny Benavente Padilla
       </p>
       <div class="info">
-        ✨ 20 JUNIO<br>
-        🕓 4:00 P.M.
+        ✨ SABADO, 20 JUNIO<br>
+        🕓 4:00 P.M. <br>
+        🗺️ Jr. Italia Nº 340 - Cerro Azul
       </div>
 
       <p class="subtitle">
@@ -594,7 +635,8 @@ function empezar() {
  
 
   <footer class="footer-love">
-    💙 Creado por Mamá con Amor para Amadeo ✨
+    💙 Creado por Papá y Mamá con Amor para Amadeo.✨ <br>
+    © 2026 - Todos los derechos reservados.
   </footer>
 
   </div><!-- fin main-content -->

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin - Lista de Regalos</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Baloo 2', cursive;
+      background:#eef5ff;
+      padding:30px;
+    }
+
+    .container{
+      max-width:1000px;
+      margin:auto;
+      background:white;
+      border-radius:25px;
+      padding:30px;
+      box-shadow:0 10px 30px rgba(0,0,0,.1);
+    }
+
+    h1{
+      text-align:center;
+      color:#5d88c7;
+      font-size:50px;
+      margin-bottom:10px;
+    }
+
+    .sub{
+      text-align:center;
+      color:#7b8ba8;
+      margin-bottom:30px;
+      font-size:22px;
+    }
+
+    .stats{
+      background:#dff0ff;
+      padding:20px;
+      border-radius:20px;
+      margin-bottom:30px;
+      text-align:center;
+      font-size:24px;
+      color:#4a6b9a;
+      font-weight:bold;
+    }
+
+    .list{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
+
+    .item{
+      background:#f8fbff;
+      border:2px solid #d7e7fb;
+      border-radius:18px;
+      padding:18px;
+      font-size:20px;
+      color:#45638f;
+    }
+
+    .reserved{
+      color:#27ae60;
+      font-weight:bold;
+      margin-top:10px;
+      display:block;
+    }
+
+    .reset-box{
+      text-align:center;
+      margin-top:40px;
+    }
+
+    #resetBtn{
+      background:#e74c3c;
+      color:white;
+      border:none;
+      padding:18px 35px;
+      border-radius:15px;
+      font-size:22px;
+      cursor:pointer;
+      font-family:'Baloo 2', cursive;
+    }
+
+    #resetBtn:hover{
+      opacity:.9;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>🎁 Panel Administrador</h1>
+
+    <div class="sub">
+      Baby Shower del Principito Amadeo 💙
+    </div>
+
+    <div class="stats" id="stats">
+      Cargando regalos reservados...
+    </div>
+
+    <div class="list" id="giftList"></div>
+
+    <div class="reset-box">
+      <button id="resetBtn">
+        🗑️ Reiniciar Lista
+      </button>
+    </div>
+
+  </div>
+
+
+
+
+
+<script type="module">
+
+// FIREBASE
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getFirestore,
+  doc,
+  onSnapshot,
+  deleteDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+
+// CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyDVF_ptb50kA9VRCA0keVKtsW_YPQlxNXE",
+  authDomain: "invitacionamadeo.firebaseapp.com",
+  projectId: "invitacionamadeo",
+  storageBucket: "invitacionamadeo.firebasestorage.app",
+  messagingSenderId: "322684899078",
+  appId: "1:322684899078:web:b480264e6165885a159373"
+};
+
+
+
+
+// INIT
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const regalosRef = doc(db, "babyshower", "regalos");
+
+
+
+
+// ELEMENTOS
+const giftList = document.getElementById("giftList");
+
+const stats = document.getElementById("stats");
+
+const resetBtn = document.getElementById("resetBtn");
+
+
+
+
+// NOMBRES BONITOS
+const nombres = {
+
+  biberones_pequenos:"🍼 Biberones pequeños",
+  biberones_grandes:"🍼 Biberones grandes",
+  almohada_lactancia:"🍼 Almohada de lactancia",
+  silla_comer:"🍼 Silla de comer para bebé",
+  extractor_leche:"🍼 Extractor de leche",
+
+  bodies_corta:"👕 Bodies manga corta",
+  bodies_larga:"👕 Bodies manga larga",
+  pijamas_algodon:"👕 Pijamas algodón",
+
+  cuna:"🛏️ Cuna",
+  cobijitas:"🛏️ Cobijitas",
+
+  panales_rn:"🛁 Pañales RN",
+  panales_p:"🛁 Pañales talla P",
+
+  coche_bebe:"🚼 Coche para bebé",
+
+  sonajeros:"🪇 Sonajeros"
+
+};
+
+
+
+
+// ESCUCHAR CAMBIOS
+onSnapshot(regalosRef, (docSnap) => {
+
+  giftList.innerHTML = "";
+
+  if(docSnap.exists()){
+
+    const data = docSnap.data();
+
+    const reservados = Object.keys(data);
+
+    stats.innerHTML =
+      `💙 Regalos reservados: ${reservados.length}`;
+
+
+
+
+
+    reservados.forEach(id => {
+
+      const div = document.createElement("div");
+
+      div.classList.add("item");
+
+      div.innerHTML = `
+        ${nombres[id] || id}
+        <span class="reserved">
+          RESERVADO
+        </span>
+      `;
+
+      giftList.appendChild(div);
+
+    });
+
+  }else{
+
+    stats.innerHTML =
+      "No hay regalos reservados todavía 💙";
+
+  }
+
+});
+
+
+
+
+// RESET
+resetBtn.addEventListener("click", async () => {
+
+  const confirmar =
+    confirm("¿Deseas reiniciar toda la lista?");
+
+  if(confirmar){
+
+    await deleteDoc(regalosRef);
+
+    alert("Lista reiniciada 💙");
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
